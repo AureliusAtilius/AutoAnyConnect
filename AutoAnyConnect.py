@@ -41,6 +41,5 @@ def runsikuli(ide_path, script_path):
 if __name__=='__main__':
     if connectionCheck("https://google.com"):
         openproc("C:\\Program Files (x86)\\Cisco\\Cisco AnyConnect Secure Mobility Client\\vpnui.exe")
-        runsikuli("C:\\Users\\jlindner\\SikuliX\\sikulixide-2.0.5.jar","C:\\Users\\jlindner\\Repos\\AutoAnyConnect\\click_connect.sikuli")
-    
+        runsikuli(<Path to Sikuli IDE>,<Path to Sikuli script>}
 
