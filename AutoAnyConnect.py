@@ -27,6 +27,7 @@ def openproc(exe_path):
         print("Unable to locate process.")
     
 def bring_to_front(app_name):
+    #Brings app to front.
     win=gw.getWindowsWithTitle(app_name)[0]
     win.minimize()
     win.restore()
