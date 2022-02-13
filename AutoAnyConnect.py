@@ -1,5 +1,5 @@
-import ifcfg, requests,subprocess
-import pygetwindow as gw
+import ifcfg, requests,subprocess,keyboard,time
+
 
 
 
@@ -25,27 +25,15 @@ def openproc(exe_path):
         subprocess.Popen(exe_path)
     except FileNotFoundError:
         print("Unable to locate process.")
-    
-def bring_to_front(app_name):
-    #Brings app to front.
-    win=gw.getWindowsWithTitle(app_name)[0]
-    win.minimize()
-    win.restore()
 
-def runsikuli(ide_path, script_path):
-    #Run Sikuli script to click "Connect" button.
-    sikuli_path=[ide_path,"-r",script_path]
-    try:
-        bring_to_front('Cisco AnyConnect Secure Mobility Client')
-        subprocess.Popen(sikuli_path, shell=True)
-    except FileNotFoundError:
-        print("Unable to locate script.")
-    
-
+def hit_enter():
+    #Wait one second then click enter
+    time.sleep(1)
+    keyboard.press('enter')  
 
 
 if __name__=='__main__':
     if connectionCheck("https://google.com"):
         openproc("C:\\Program Files (x86)\\Cisco\\Cisco AnyConnect Secure Mobility Client\\vpnui.exe")
-        runsikuli(<Path to Sikuli IDE>,<Path to Sikuli script>}
+        hit_enter()
 
