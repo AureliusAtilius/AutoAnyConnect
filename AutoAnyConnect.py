@@ -1,7 +1,21 @@
-import ifcfg, requests,subprocess,keyboard,time
+import ifcfg, requests,subprocess,keyboard,time,win32gui
 
 
+def windowEnumerationHandler(hwnd, top_windows):
+    #Create list of top windows
+    top_windows.append((hwnd, win32gui.GetWindowText(hwnd)))
 
+def bring_to_front():
+    #Take list of top windows, search for Cisco Anyconnect and bring to front.
+    results = []
+    top_windows = []
+    win32gui.EnumWindows(windowEnumerationHandler, top_windows)
+    for i in top_windows:
+        if "cisco anyconnect secure mobility client" in i[1].lower():
+            print(i)
+            win32gui.ShowWindow(i[0],5)
+            win32gui.SetForegroundWindow(i[0])
+            break
 
 def connectionCheck(ext_domain):
     #Get network information
@@ -28,6 +42,7 @@ def openproc(exe_path):
 
 def hit_enter():
     #Wait one second then click enter
+    bring_to_front()
     time.sleep(1)
     keyboard.press('enter')  
 
