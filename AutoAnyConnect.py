@@ -1,4 +1,4 @@
-import ifcfg, requests,subprocess,keyboard,time,win32gui
+import ifcfg, requests,subprocess,keyboard,time,win32gui,os
 
 
 def windowEnumerationHandler(hwnd, top_windows):
@@ -46,9 +46,18 @@ def hit_enter():
     time.sleep(1)
     keyboard.press('enter')  
 
+def openStartupApps():
+    username= os.getlogin()
+    os.system('C:/Users/{}/AppData/Local/Microsoft/Teams/Update.exe --processStart "Teams.exe"'.format(username))
+    time.sleep(30)
+    os.startfile("outlook")
+
 
 if __name__=='__main__':
     if connectionCheck("https://google.com"):
         openproc("C:\\Program Files (x86)\\Cisco\\Cisco AnyConnect Secure Mobility Client\\vpnui.exe")
         hit_enter()
+        openStartupApps()
+    else:
+        openStartupApps()
 
