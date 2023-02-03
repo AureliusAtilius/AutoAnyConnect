@@ -24,7 +24,7 @@ def connectionCheck(ext_domain):
     #Check which network adapter is connected. If Wifi is connected then check connectivity to external domain.
     try:
 
-        if (not interfaces['Ethernet adapter Ethernet']['inet'] and interfaces['Wireless LAN adapter Wi-Fi']['inet']!= None):
+        if (not interfaces['Ethernet adapter Ethernet']['inet'] and 'Ethernet adapter Ethernet 2' not in interfaces):
             request=requests.get(ext_domain, timeout=3)
             result = True
     except KeyError:
@@ -56,7 +56,9 @@ def openStartupApps():
 if __name__=='__main__':
     if connectionCheck("https://google.com"):
         openproc("C:\\Program Files (x86)\\Cisco\\Cisco AnyConnect Secure Mobility Client\\vpnui.exe")
-        hit_enter()
+        time.sleep(2)
+        while connectionCheck("https://google.com"):
+            hit_enter()
         openStartupApps()
     else:
         openStartupApps()
